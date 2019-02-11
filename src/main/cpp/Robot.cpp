@@ -10,7 +10,10 @@ void Robot::RobotInit() {
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 }
 
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+  driveStick.updateButtons();
+  opStick.updateButtons();
+}
 
 void Robot::AutonomousInit() {
   m_autoSelected = m_chooser.GetSelected();

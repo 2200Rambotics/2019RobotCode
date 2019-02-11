@@ -3,6 +3,7 @@
 #include <string>
 
 #include <frc/TimedRobot.h>
+#include "JoyStickDebounced.h"
 #include <frc/smartdashboard/SendableChooser.h>
 
 class Robot : public frc::TimedRobot {
@@ -15,7 +16,10 @@ class Robot : public frc::TimedRobot {
   void TeleopPeriodic() override;
   void TestPeriodic() override;
 
- private:
+private:
+  JoyStickDebounced driveStick;
+  JoyStickDebounced opStick;
+
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
