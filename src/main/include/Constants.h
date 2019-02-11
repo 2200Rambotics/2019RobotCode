@@ -17,7 +17,6 @@ class Constants {
     static const int xboxLeftShoulder = 5;
     static const int xboxRightShoulder = 6;
     
-    
     //AXES
     static const int xboxLeftTrigger = 2;
     static const int xboxRightTrigger = 3;
@@ -27,59 +26,47 @@ class Constants {
     static const int xboxRightThumbstickX = 4;
     static const int xboxRightThumbstickY = 5;
     
+    // CAN IDs
+    static const int leftDriveMotorID1 = 1;
+    static const int leftDriveMotorID2 = 2;
+    
+    static const int rightDriveMotorID1 = 3;
+    static const int rightDriveMotorID2 = 4;
+    
+    static const int elevatorLeftMotorID1 = 5;
+    static const int elevatorLeftMotorID2 = 6;
+    static const int elevatorRightMotorID1 = 7;
+    static const int elevatorRightMotorID2 = 8;
 
-    
-    //Motors
-    static const int leftMotor1 = 2;
-    static const int leftMotor2 = 5;
-    //const int leftMotor3 = 2;
-    
-    static const int rightMotor1 = 7;
-    static const int rightMotor2 = 6;
-    //const int rightMotor3 = 7;
-    
-    static const int intakeLeftMotor = 8;
-    static const int intakeRightMotor = 10;
-    
-    // TODO this used to be 9, but I changed it to work on the test board
-    //static const int armMotor = 9;
-    static const int armMotor = 6;
-    static const int climbMotor = 11;
-    
-    //Pneumatics
-    static const int mainPCM = 12;
-    static const int secPCM = 13;
-    
+    static const int intakeAngleMotorID = 9;
+
+    static const int intakeUpperRollerMotorID = 10;
+    static const int intakeLowerRollerMotorID = 11;
+
+    static const int stiltPositionMotorID = 12;
+
+    static const int mainPCM = 20;
     
     //Pins
-    static const int leftEncoderA = 2 ;
-    static const int leftEncoderB = 3 ;
-    static const int rightEncoderA = 0 ;
-    static const int rightEncoderB = 1;
-    
-    
     
     //****Pneumatic Channels
-    //Power Take Off
-    static const int ptoSolFwd=3;
-    static const int ptoSolRev=4;
+    // Finger tilt
+    static const int fingerTiltFwd=0;
+    static const int fingerTiltRev=7;
+
+    // Finger extend
+    static const int fingerExtendFwd=0;
+    static const int fingerExtendRev=7;
+
+    // Disc stop
+    static const int discStopFwd=0;
+    static const int discStopRev=7;
 
     //Gearbox
     static const int gearSolFwd=0;
     static const int gearSolRev=7;
-    
-    //Forklift
-    static const int forkSolFwd=0;
-    static const int forkSolRev=7;
-    
-    //Intake
-    static const int inSolFwd=5;
-    static const int inSolRev=2;
-    
-    //Claw and Brake
-    static const int clawBrkFwd=6;
-    static const int clawBrkRev=1;
 
+    // TODO move this to a per-class variable
 	/**
 	 * How many sensor units per rotation.
 	 * Using CTRE Magnetic Encoder.
