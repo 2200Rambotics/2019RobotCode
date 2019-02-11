@@ -1,0 +1,197 @@
+Inputs:
+Left drive encoder
+Right drive encoder
+Elevator Height encoder
+Intake angle encoder
+Intake upper roller encoder
+Intake lower roller encoder
+Stilt height encoder.
+Digital angle from NavX
+Line sensor array (5 sensors across front of robot)
+
+
+Outputs:
+Left drive motors (Talon 1+2)
+Right drive motors (Talon 3+4)
+Elevator motors (Talon 5-8, Note left side must rotate opposite direction from right side)
+Intake angle (Talon 9)
+Upper intake roller (Talon 10)
+Lower intake roller (Talon 11)
+Stilt position (Talon 12)
+Shift solenoid (unknown pins)
+Finger tilt solenoid (unknown pins)
+Finger extend solenoid (unknown pins)
+Disc stop solenoid (unknown pins)
+
+
+#########
+Controls:
+#########
+
+Driver:
+1.  Unused
+2.  Unused
+3.  Drive control
+4.  Unused
+5.  Gear shift (hold for high)p
+6.  Unused
+7.  Unused
+8.  Unused
+9.  Unused
+10. Unused
+X.  Unused
+Y.  Unused
+A.  Follow line
+B.  Unused
+
+Co-Driver
+1.  Unused
+2.  UP(UP) Down(Down) Left (accept) Right (cancel)
+3.  Unused
+4.  Unused
+5.  Disc pickup ground
+6.  Disc Pickup Feeder station
+7.  Unused
+8.  Unused
+9.  Unused
+10. Disc Score
+X.  Ball Score Cargoship
+Y.  Ball Score Rocketship
+A.  Ball pickup ground
+B.  Ball pickup feederstation
+
+
+#########
+Teleop-Op
+#########
+
+Drive - Arcade control on left stick
+Gear Shifting Button on drivers control, hold for high gear - release for low gear.
+
+Continuous safety checks
+Intake height only adjustable between 20 and 44 inches if intake angle is greater than 10 degrees
+Intake height only adjustable between 44 and 65 inches if intake angle is greater than 20 degrees
+
+Unit conversions:
+Elevator convert counts to inches
+Rotating systems counts to degrees
+
+###############################
+Game piece loading Subroutines:
+###############################
+
+Load disc from feeder station:
+- While button held
+    - Elevator to height to zero(0)
+    - Intake angle to zero(0) degrees
+    - Finger tilt down
+    - Finger Extend
+
+- When button released
+    - Finger tilt up
+    - Finger retract
+
+Load ball from feeder station:
+- When button held
+    - Intake angle to 10 degrees
+    - Intake height to 28”
+    - Run both intake rollers in
+
+- When button released
+    - Shut off rollers
+    - Lower intake to zero height
+    - Intake angle to zero degrees
+
+Load ball from ground:
+- When button held
+    - Intake to zero height
+    - Intake to 60 degrees
+    - Run both intake rollers in
+
+- When button released
+    - Stop intake rollers
+    - Intake angle to zero
+    - Intake height to zero
+
+Load disc from ground:
+- When button held
+    - Extend disc stop
+    - Intake to 85 degrees
+    - Intake height to zero
+    - Finger tilt down
+- When button released
+    - Intake to 91 degrees
+    - Retract disc stop
+    - Extend finger
+    - Intake to 80 degrees
+    - Finger tilt up
+    - Retract finger
+    - Intake to 0 degrees
+
+Ball center routine:
+- When button held
+    - Upper intake roller runs in at target speed
+    - Lower intake roller runs out at same speed as upper roller.  (note different gear ratios, but encoder is after reduction)
+- When button released
+    - Stop rollers
+
+###############################
+Game piece scoring subroutines:
+###############################
+
+Score ball Cargoship:
+- When button held
+    - Intake to 30 degrees
+    - Intake to 28” height
+    - When accept button heald run intake rollers out to score ball.
+    - Hold cancel will run rollers in.
+- When button released
+    - Intake to 0 height
+    - Intake to 0 degrees
+
+Score ball rocketship:
+- When button held
+    - Intake to 0 degrees
+    - Intake height to 12 inches
+    - Intake height adjustable with up and down controls
+        - Lowest height 12 inches
+            - Intake to 20 degrees
+            - Intake height to 12 inches
+            - Intake to zero degrees
+        - Middle Height 40 inches
+            - Intake to 20 degrees
+            - Intake to 40 inches
+            - Intake to 0 degrees
+        - Highest height 65 inches
+            - Intake to 20 degrees
+            - Intake to 65 inches
+            - Intake to 15 degrees
+    - Hold accept will run rollers out to score ball
+    - Hold cancel will run rollers in.
+- When button released
+    - Intake to 20 degrees
+    - Intake to 0 inches
+    - Intake to 0 degrees
+
+Score disc:
+- When button held
+    - Intake to 20 degrees
+    - Intake height to 2”.
+    - Intake height adjustable with up and down controls.
+        - Lowest height 2”
+        - Middle height 30”
+        - Top height 58”
+
+    - Finger extend
+    - Finger tilt down.
+    - Accept and Cancel cycle through 3 finger positions  Cancel moves up the list Accept moves down  default state is middle state
+        - Finger Up, Finger Retract
+        - Finger down, Finger Extend
+        - Finger down, Finger Retract
+
+- When button released
+    - Intake height to zero
+    - Intake angle to zero
+    - Finger retract
+    - Finger up
+
