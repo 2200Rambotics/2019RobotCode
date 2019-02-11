@@ -11,5 +11,8 @@
     ".classpath": true,
     ".project": true
   },
-  "telemetry.enableTelemetry": false
+  "telemetry.enableTelemetry": false,
+  "files.associations": {
+    "*.inc": "cpp"
+  }
 }
