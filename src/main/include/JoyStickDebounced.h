@@ -4,6 +4,10 @@
 
 class JoyStickDebounced : public frc::Joystick {
   public:
+  explicit JoyStickDebounced(int id): 
+  frc::Joystick(id) {
+
+  }
 
   bool getButtonDebounced(int num) {
     return buttons[num] && !last_buttons[num];
@@ -16,7 +20,7 @@ class JoyStickDebounced : public frc::Joystick {
   void updateButtons() {
     for (int i = 0; i < 11; ++i) {
       last_buttons[i] = buttons[i];
-      buttons[i] = this->GetRawButton[i];
+      buttons[i] = this->GetRawButton(i);
     }
   }
 

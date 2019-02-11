@@ -3,8 +3,13 @@
 #include <string>
 
 #include <frc/TimedRobot.h>
-#include "JoyStickDebounced.h"
 #include <frc/smartdashboard/SendableChooser.h>
+
+#include "JoyStickDebounced.h"
+#include "Elevator.h"
+#include "Intake.h"
+#include "Drive.h"
+#include "Stilt.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -17,8 +22,13 @@ class Robot : public frc::TimedRobot {
   void TestPeriodic() override;
 
 private:
-  JoyStickDebounced driveStick;
-  JoyStickDebounced opStick;
+  JoyStickDebounced driveStick{0};
+  JoyStickDebounced opStick{1};
+  
+  Drive drive;
+  Elevator elevator;
+  Intake intake;
+  Stilt stilt;
 
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
