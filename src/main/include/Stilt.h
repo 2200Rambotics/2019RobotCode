@@ -1,13 +1,20 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 #pragma once
 
+#include <frc/WPILib.h>
+#include <ctre/Phoenix.h>
+#include <tuple>
+
+#include "Constants.h"
+
 class Stilt {
- public:
+  public:
   Stilt();
+
+  private:
+  double _f = 0.0;
+  double _p = 1.0;
+  double _i = 0.0;
+  double _d = 20.0;
+
+  WPI_TalonSRX stiltMotor{Constants::leftDriveMotorID1};
 };
