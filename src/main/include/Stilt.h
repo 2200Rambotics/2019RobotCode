@@ -9,6 +9,9 @@
 class Stilt {
   public:
   Stilt();
+  void DisplayEncoderInfo();
+  void updateFPID(double f, double p, double i, double d);
+  std::tuple<double, double, double, double> getFPID();
 
   private:
   double _f = 0.0;
@@ -16,5 +19,5 @@ class Stilt {
   double _i = 0.0;
   double _d = 20.0;
 
-  WPI_TalonSRX stiltMotor{Constants::leftDriveMotorID1};
+  WPI_TalonSRX stiltMotor{Constants::stiltPositionMotorID};
 };
