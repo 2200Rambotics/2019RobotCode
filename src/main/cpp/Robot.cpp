@@ -46,7 +46,15 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {}
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  if (driveStick.GetRawButtonPressed(Constants::xboxRightThumbstickClick)) {
+    // Load FPID from dash and update all motor pid parameters
+    drive.updateFPID();
+    elevator.updateFPID();
+    intake.updateFPID();
+    stilt.updateFPID();
+  }
+}
 
 void Robot::TestPeriodic() {}
 

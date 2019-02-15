@@ -12,6 +12,16 @@ class Intake {
   void putFPID();
   void updateFPID();
 
+  static constexpr const double countsPerDegree = 211.0;
+
+  enum class DesiredState {
+    BallFromGround = static_cast<int>(countsPerDegree * 60)
+    /* 
+    add more here
+    */
+
+  };
+
   private:
   double angleF = 0.0;
   double angleP = 1.0;
