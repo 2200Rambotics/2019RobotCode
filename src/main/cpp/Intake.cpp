@@ -1,4 +1,6 @@
 #include "Intake.h"
+#include "Helpers.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 Intake::Intake() {}
 
@@ -8,38 +10,16 @@ void Intake::DisplayEncoderInfo(){
     frc::SmartDashboard::PutNumber("Intake angle Encoder: ", intakeAngleMotor.GetSelectedSensorPosition(0));
 }
 
-void Intake::updateAngleFPID(double f, double p, double i, double d) {
-	_AngleF = f;
-	_AngleP = p;
-	_AngleI = i;
-	_AngleD = d;
-
-	intakeAngleMotor.Config_kF(0, _AngleF, Constants::kTimeoutMs);
-	intakeAngleMotor.Config_kP(0, _AngleP, Constants::kTimeoutMs);
-	intakeAngleMotor.Config_kI(0, _AngleI, Constants::kTimeoutMs);
-	intakeAngleMotor.Config_kD(0, _AngleD, Constants::kTimeoutMs);
+void Intake::putFPID() {
+	Helpers::pushFPIDToDash("Intake roller", rollerF, rollerP, rollerI, rollerD);
+	Helpers::pushFPIDToDash("Intake angle", angleF, angleP, angleI, angleD);
 }
 
-std::tuple<double, double, double, double> Intake::getAngleFPID() {
-	return std::make_tuple(_AngleF, _AngleP, _AngleI, _AngleD);
-}
+void Intake::updateFPID() {
+	Helpers::pullFPIDFromDash("Intake roller", rollerF, rollerP, rollerI, rollerD);
+	Helpers::pullFPIDFromDash("Intake angle", angleF, angleP, angleI, angleD);
 
-void Intake::updateRollerFPID(double f, double p, double i, double d) {
-	_RollerF = f;
-	_RollerP = p;
-	_RollerI = i;
-	_RollerD = d;
-
-	intakeUpperMotor.Config_kF(0, _RollerF, Constants::kTimeoutMs);
-	intakeUpperMotor.Config_kP(0, _RollerP, Constants::kTimeoutMs);
-	intakeUpperMotor.Config_kI(0, _RollerI, Constants::kTimeoutMs);
-	intakeUpperMotor.Config_kD(0, _RollerD, Constants::kTimeoutMs);
-	intakeLowerMotor.Config_kF(0, _RollerF, Constants::kTimeoutMs);
-	intakeLowerMotor.Config_kP(0, _RollerP, Constants::kTimeoutMs);
-	intakeLowerMotor.Config_kI(0, _RollerI, Constants::kTimeoutMs);
-	intakeLowerMotor.Config_kD(0, _RollerD, Constants::kTimeoutMs);
-}
-
-std::tuple<double, double, double, double> Intake::getRollerFPID() {
-	return std::make_tuple(_RollerF, _RollerP, _RollerI, _RollerD);
+	Helpers::setMotorFPID(intakeAngleMotor, angleF, angleP, angleI, angleD);
+	Helpers::setMotorFPID(intakeUpperMotor, rollerF, rollerP, rollerI, rollerD);
+	Helpers::setMotorFPID(intakeLowerMotor, rollerF, rollerP, rollerI, rollerD);
 }

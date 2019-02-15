@@ -8,11 +8,21 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+  drive.putFPID();
+  elevator.putFPID();
+  intake.putFPID();
+  stilt.putFPID();
 }
 
 void Robot::RobotPeriodic() {
   driveStick.updateButtons();
   opStick.updateButtons();
+
+  drive.DisplayEncoderInfo();
+  elevator.DisplayEncoderInfo();
+  intake.DisplayEncoderInfo();
+  stilt.DisplayEncoderInfo();
 }
 
 void Robot::AutonomousInit() {
